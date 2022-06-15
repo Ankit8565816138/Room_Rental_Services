@@ -1,0 +1,35 @@
+{% include 'user_navigation.html' %}
+
+<div class="container">
+    <form action=""method="post">
+        {% csrf_token %}
+        <font color="black"><label>Full Name:-</label>
+        <input type="text" class="form-control" name="fname" value="{{request.user.first_name}} {{request.user.last_name}}">
+        <label>Contact:</label>
+        <input type="text" class="form-control" name="contact" value="{{data.mobile}}">
+        <label>Email:</label>
+        <input type="text" class="form-control" name="email" value="{{request.user}}" readonly>
+            <label>Purpose:</label></font>>
+        <textarea class="form-control" name="purpose" placeholder="Write Reason to Contact"></textarea>
+        <center style="margin-top:30px;">
+            <input type="submit" class="btn btn-primary" style="font-size:25px;width:200px;height:50px;">
+            <a href="{% url 'user_home' %}" class="btn btn-dark" style="font-size:25px;width:200px;height:50px;">Cancel</a>
+        </center>
+    </form>
+</div>
+
+
+{% if error == "no" %}
+<script>
+    alert("Feedback Sent Successfull")
+    window.location = ('{% url 'feedback' %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something Wrong, Try Again...")
+</script>
+{% endif %}
+
+{% include 'footer.html' %}

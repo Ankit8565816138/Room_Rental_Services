@@ -1,0 +1,44 @@
+{% include 'admin_navigation.html' %}
+
+<marquee behavior="alternate" style="font-family:'MonotypeCorsiva'; font-size:35px; color:cyan; background-color:black;
+font-weight:bold; margin-top:1%">
+  <h4>View Users</h4>
+</marquee>
+
+
+<form method="POST" action="/search2">
+{% csrf_token %}
+<input type="search" name="search2" placeholder="Please Search By Mobile No" style="width:800px;">
+<input type="submit" class="btn btn-primary">
+<a href="{% url 'view_user' %}" class="btn btn-danger">Cancel</a>
+</form>
+
+
+
+<table class="table table-hover mt-3">
+    <tr bgcolor="lightgreen">
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Profile</th>
+        <th>Action</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+        <td>{{i.user.username}}</td>
+        <td>{{i.mobile}}</td>
+        <td>{{i.gender}}</td>
+        <td>{{i.address}}</td>
+        <td><img src="{{i.image.url}}" height="100" width="100" style="border-radius:50%;"></td>
+        <td><a href="{% url 'delete_user' i.user.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure ?')">Delete User</a></td>
+    </tr>
+{% endfor %}
+</table>
+
+{% include 'footer.html' %}
+

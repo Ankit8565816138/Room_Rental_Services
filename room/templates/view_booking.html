@@ -1,0 +1,57 @@
+{% include 'admin_navigation.html' %}
+
+<marquee behavior="alternate" style="font-family:'MonotypeCorsiva'; font-size:35px; color:cyan; background-color:black;
+font-weight:bold; margin-top:1%">
+  <h4>All Booking</h4>
+</marquee>
+
+<form method="POST" action="/search">
+{% csrf_token %}
+<input type="search" name="search" placeholder="Search By Name" style="width:800px;">
+<input type="submit" class="btn btn-primary">
+<a href="{% url 'view_booking' %}" class="btn btn-danger">Cancel</a>
+</form>
+
+<table class="table table-hover mt-3">
+    <tr bgcolor="lightgreen">
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Room Number</th>
+        <th>Booking Date</th>
+        <th>Days</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.full_name}}</td>
+        <td>{{i.email_id}}</td>
+        <td>1->{{i.mobile1}}<br>2->{{i.mobile2}}</td>
+        <td>{{i.room_no}}</td>
+        <td>{{i.booking_date}}</td>
+        <td>{{i.days}} Days</td>
+        <td>{{i.price}}</td>
+        <td><a href="{% url 'change_status' i.id %}" class="btn btn-light btn-sm">
+         {% if i.status == "Confirm" %}
+           <span style="color:green;"> {{i.status}}</span>
+            {% endif %}
+
+            {% if i.status == "Canceled" %}
+           <span style="color:red;"> {{i.status}}</span>
+          {% endif %}
+
+         {% if i.status == "Pending" %}
+           <span style="color:blue;"> {{i.status}}</span>
+          {% endif %}
+
+        </td></a>
+        <td><a href="{% url 'delete_booking' i.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure ?')">Delete Booking</a></td>
+    </tr>
+{% endfor %}
+</table>
+
+{% include 'footer.html' %}

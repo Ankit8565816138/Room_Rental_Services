@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include 'navigation.html' %}
+    <meta charset="UTF-8">
+    <title>title</title>
+    <style>
+    #abc1{
+        border:2px solid black;
+        height:500px;
+        width:100%;
+        background-image:url({% static 'images/23.jpeg' %});
+        background-size:100% 100%;
+        animation: abc2 70s infinite linear;
+    }
+    @keyframes abc2{
+    20%{background-image:url({% static 'images/30.jpg' %});}
+    40%{background-image:url({% static 'images/24.jpeg' %});}
+    60%{background-image:url({% static 'images/23.jpeg' %});}
+    80%{background-image:url({% static 'images/30.jpg' %});}
+    100%{background-image:url({% static 'images/24.jpeg' %});}
+    }
+
+</style>
+</head>
+<body>
+<div class="container-fluid" id="abc1"></div>
+</body>
+</html>
+
+{% include 'footer.html' %}

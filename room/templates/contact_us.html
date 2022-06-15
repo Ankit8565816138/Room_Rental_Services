@@ -1,0 +1,34 @@
+{% include 'navigation.html' %}
+
+<div class="container">
+    <form action=""method="post">
+        {% csrf_token %}
+        <label>Full Name:</label>
+        <input type="text" class="form-control" name="fname" placeholder="Write Full Name Here">
+        <label>Contact:</label>
+        <input type="text" class="form-control" name="contact" placeholder="Write Your Contact Number">
+        <label>Email:</label>
+        <input type="text" class="form-control" name="email" placeholder="Write Your Email Here">
+        <label>Purpose:</label>
+        <textarea class="form-control" name="purpose" placeholder="Write Reason to Contact"></textarea>
+        <center style="margin-top:30px;">
+            <input type="submit" class="btn btn-primary" style="font-size:25px;width:200px;height:50px;">
+            <a href="{% url 'index' %}" class="btn btn-dark" style="font-size:25px;width:200px;height:50px;">Cancel</a>
+        </center>
+    </form>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert("Contact Massage Sent Successfull")
+    window.location = ('{% url 'contact_us' %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something Wrong, Try Again...")
+</script>
+{% endif %}
+
+{% include 'footer.html' %}
